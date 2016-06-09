@@ -5,8 +5,19 @@ belongs_to :user
 
 
 
+  def relevent_data
+    {"url" => self.url,
+    "title" => self.title,
+    "description" => self.description ||= ""}
+  end
 
-
+  def relevent_data_with_reco
+    friend = User.find(self.recommended_by_id).username
+    {"url" => self.url,
+    "title" => self.title,
+    "description" => self.description ||= "",
+    "recommended_by" => friend}
+  end
 
 
 

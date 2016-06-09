@@ -45,6 +45,13 @@ class AppTests < Minitest::Test
     "recommended_for" => "jason.jordan"}.to_json
   end
 
+  def trial_body_recom2
+    {"url" => "www.whateva.com",
+    "title" => "Aardwolf",
+    "description" => "Not a panda",
+    "recommended_for" => "jason.jordan"}.to_json
+  end
+
   def trial_body_missing
     {"title" => "Blahblah",
     "description" => "New Hotness"}.to_json
@@ -130,7 +137,25 @@ class AppTests < Minitest::Test
 
     assert_equal 200, r.status
     body = JSON.parse r.body
-    assert_equal 2, body.count 
+    assert_equal 2, body.count
+  end
+
+  def test_user_can_get_list_of_recoms
+    make_existing_users
+    user = User.first
+    friend = User.last
+
+    header "Authorization", user.username
+    q = post "/links/recommended", body = trial_body_recom
+    t = post "/links/recommended", body = trial_body_recom2
+
+    header "Authorization", friend.username
+
+    r = get "/links/recommended"
+
+    assert_equal 200, r.status
+    body = JSON.parse r.body
+    assert_equal 2, body.count
   end
 
 end
