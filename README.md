@@ -60,7 +60,7 @@ Also, if you want to punch up the name / brand, feel free!
   body = {url => "www....",
           title => "Funny Cat",
           description => "Cat cant jump from counter.",
-          reco_user => "scrappydoo"}
+          recommended_for => "scrappydoo"}
           in json format
 
   -response
@@ -81,12 +81,12 @@ Also, if you want to punch up the name / brand, feel free!
               {url => "www.... ",
               title => "Funny Cat",
               description => "Cat cant jump from counter.",
-              reco_user => "jamesdabbs"},
+              recommended_by => "jamesdabbs"},
 
               {url => "www....",
               title => "Stupid Dog",
               description => "Dog runs away from kitten.",
-              reco_user => "scoobydoo"}
+              recommended_by => "scoobydoo"}
                     ]
               } in json format
 
