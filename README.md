@@ -60,7 +60,7 @@ Also, if you want to punch up the name / brand, feel free!
   body = {url => "www....",
           title => "Funny Cat",
           description => "Cat cant jump from counter.",
-          reco_user => 145}
+          reco_user => "scrappydoo"}
           in json format
 
   -response
