@@ -32,6 +32,12 @@ class AppTests < Minitest::Test
     "description" => "New Hotness"}.to_json
   end
 
+  def trial_body2
+    {"url" => "www.blah.com",
+    "title" => "Beep",
+    "description" => "Boop"}.to_json
+  end
+
   def trial_body_recom
     {"url" => "www.whocares.com",
     "title" => "Blahblah",
@@ -111,6 +117,20 @@ class AppTests < Minitest::Test
 
     assert_equal 400, q.status
     assert_equal 400, r.status
+  end
+
+  def test_user_can_get_list_of_links
+    make_existing_users
+    user = User.first
+    header "Authorization", user.username
+    q = post "/links", body = trial_body
+    t = post "/links", body = trial_body2
+
+    r = get "/links"
+
+    assert_equal 200, r.status
+    body = JSON.parse r.body
+    assert_equal 2, body.count 
   end
 
 end
