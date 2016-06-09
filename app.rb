@@ -31,7 +31,8 @@ class PlockApp < Sinatra::Base
   end
 
   post "/links" do
-    Link.create!(url: params[:url], title: params[:title], description: params[:description], user_id: params[:user_id])
+    user_id = User.find_by(username: params[:username]).id
+    Link.create!(url: params[:url], title: params[:title], description: params[:description], user_id: user_id)
   end
 
   get "/links/recommended" do
@@ -40,7 +41,7 @@ class PlockApp < Sinatra::Base
 
   post "/links/recommended" do
     friend_id = User.find_by(username: params[:user]).id
-    Link.create!(url: params[:url], title: params[:title], description: params[:description], user_id: friend_id, recommended_by: params[:recommended_by].to_i)
+    Link.create!(url: params[:url], title: params[:title], description: params[:description], user_id: friend_id, recommended_by_id: user.id)
   end
 
 end

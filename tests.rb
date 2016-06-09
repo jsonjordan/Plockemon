@@ -22,6 +22,8 @@ class AppTests < Minitest::Test
   def make_existing_users
     User.create! username: "mariacassino"
     User.create! username: "jason.jordan"
+    # User.create! username: "travisjohnson"
+    # User.create! username: "nntroyer"
   end
 
   def test_users_can_add_links
@@ -30,7 +32,7 @@ class AppTests < Minitest::Test
     header "Authorization", user.username
     assert_equal 0, Link.count
 
-    r = post "/links", description: "New Hotness", title: "Blahblah", url: "www.whocares.com", user_id: user.id
+    r = post "/links", description: "New Hotness", title: "Blahblah", url: "www.whocares.com", username: user.username
 
     assert_equal 200, r.status
     assert_equal 1, Link.count
@@ -44,12 +46,11 @@ class AppTests < Minitest::Test
     header "Authorization", user.username
     assert_equal 0, Link.count
 
-    r = post "links/recommended", description: "New Hotness", title: "Blahblah", url: "www.whocares.com", recommended_by: user.id, user: friend.username
+    r = post "links/recommended", description: "New Hotness", title: "Blahblah", url: "www.whocares.com", recommended_by: user.username, user: friend.username
 
     assert_equal 200, r.status
     assert_equal 1, Link.count
-    binding.pry
-    assert_equal user.id, Link.first.recommended_by
+    assert_equal user.id, Link.first.recommended_by_id
     assert_equal friend.id, Link.first.user_id
 
   end
