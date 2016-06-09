@@ -39,7 +39,7 @@ class AppTests < Minitest::Test
     assert_equal "New Hotness", Link.first.description
   end
 
-  def test_user_can_recommed_to_another_user
+  def test_user_can_recommend_to_another_user
     make_existing_users
     user = User.first
     friend = User.last
@@ -53,6 +53,28 @@ class AppTests < Minitest::Test
     assert_equal user.id, Link.first.recommended_by_id
     assert_equal friend.id, Link.first.user_id
 
+  end
+
+  def test_no_username_will_error
+    make_existing_users
+    user = User.first
+
+    r = post "/links", description: "New Hotness", title: "Blahblah", url: "www.whocares.com", username: user.username
+
+    assert_equal 401, r.status
+  end
+
+  def test_missing_params_will_error
+    make_existing_users
+    user = User.first
+    friend = User.last
+    header "Authorization", user.username
+
+    r = post "/links", description: "New Hotness", title: "Blahblah"
+    q = post "links/recommended", description: "New Hotness", url: "www.whocares.com", recommended_by: user.username, user: friend.username
+
+    assert_equal 400, q.status
+    assert_equal 400, r.status
   end
 
 end

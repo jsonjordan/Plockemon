@@ -19,11 +19,16 @@ class PlockApp < Sinatra::Base
 
   def user
     username = request.env["HTTP_AUTHORIZATION"]
-    if username
-      User.where(username: username).first_or_create!
+    if !username
+      # raise "No username provided"
+      halt 401
+    elsif username == User.where(username: username).first.username
+      User.where(username: username).first
     else
+      # raise "User not found"
       halt 401
     end
+
   end
 
   get "/links" do
@@ -31,8 +36,11 @@ class PlockApp < Sinatra::Base
   end
 
   post "/links" do
-    user_id = User.find_by(username: params[:username]).id
-    Link.create!(url: params[:url], title: params[:title], description: params[:description], user_id: user_id)
+    begin
+      Link.create!(url: params[:url], title: params[:title], description: params[:description], user_id: user.id)
+    rescue
+      400
+    end
   end
 
   get "/links/recommended" do
@@ -40,8 +48,12 @@ class PlockApp < Sinatra::Base
   end
 
   post "/links/recommended" do
-    friend_id = User.find_by(username: params[:user]).id
-    Link.create!(url: params[:url], title: params[:title], description: params[:description], user_id: friend_id, recommended_by_id: user.id)
+    begin
+      friend_id = User.find_by(username: params[:user]).id
+      Link.create!(url: params[:url], title: params[:title], description: params[:description], user_id: friend_id, recommended_by_id: user.id)
+    rescue
+      400
+    end
   end
 
 end
