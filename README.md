@@ -14,9 +14,9 @@ I'm okay with using a hardcoded list of users / passwords / Slack usernames as a
 
 Also, if you want to punch up the name / brand, feel free!
 
-##Api
+#Api
 
-#To add link
+## To add link
   post "/links"
   -request
   header: Authorization: "username"
@@ -53,7 +53,7 @@ Also, if you want to punch up the name / brand, feel free!
   404 - Not Found
   500 - Server Issues
 
-### To post recommendations
+## To post recommendations
   post "/links/recommended"
   -request
   header: Authorization: "username"
@@ -70,7 +70,7 @@ Also, if you want to punch up the name / brand, feel free!
   404 - Not Found
   500 - Server Issues
 
-#### To get recommendations
+## To get recommendations
   get "/links/recommended"
   -request
   header: Authorization: "username"
