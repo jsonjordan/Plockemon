@@ -4,8 +4,8 @@ class CreateLink < ActiveRecord::Migration
       t.string :url
       t.string :title
       t.text :description
-      t.string :recommended_by
-      t.datetime :created_at, default: Time.now 
+      t.integer :recommended_by_id 
+      t.datetime :created_at, default: Time.now
       t.integer :user_id
     end
   end
