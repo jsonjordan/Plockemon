@@ -21,14 +21,19 @@ class PlockApp < Sinatra::Base
     username = request.env["HTTP_AUTHORIZATION"]
     if !username
       # raise "No username provided"
-      halt 401
-    elsif username == User.where(username: username).first.username
+      halt 401, "Username not provided"
+    elsif User.where(username: username).first
       User.where(username: username).first
     else
       # raise "User not found"
-      halt 401
+      halt 403, "No user by that username"
     end
 
+  end
+
+  def parsing_incoming
+    incoming_data = request.body.read
+    JSON.parse incoming_data
   end
 
   get "/links" do
@@ -36,8 +41,9 @@ class PlockApp < Sinatra::Base
   end
 
   post "/links" do
+    parsed_data = parsing_incoming
     begin
-      Link.create!(url: params[:url], title: params[:title], description: params[:description], user_id: user.id)
+      Link.create!(url: parsed_data["url"], title: parsed_data["title"], description: parsed_data["description"], user_id: user.id)
     rescue
       400
     end
@@ -48,11 +54,16 @@ class PlockApp < Sinatra::Base
   end
 
   post "/links/recommended" do
+    parsed_data = parsing_incoming
     begin
-      friend_id = User.find_by(username: params[:user]).id
-      Link.create!(url: params[:url], title: params[:title], description: params[:description], user_id: friend_id, recommended_by_id: user.id)
+      friend_id = User.find_by(username: parsed_data["recommended_for"]).id
     rescue
-      400
+      halt 400, "No such user exists"
+    end
+    begin
+      Link.create!(url: parsed_data["url"], title: parsed_data["title"], description: parsed_data["description"], user_id: friend_id, recommended_by_id: user.id)
+    rescue
+      halt 400, "Not all information provided"
     end
   end
 

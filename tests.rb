@@ -26,13 +26,38 @@ class AppTests < Minitest::Test
     # User.create! username: "nntroyer"
   end
 
+  def trial_body
+    {"url" => "www.whocares.com",
+    "title" => "Blahblah",
+    "description" => "New Hotness"}.to_json
+  end
+
+  def trial_body_recom
+    {"url" => "www.whocares.com",
+    "title" => "Blahblah",
+    "description" => "New Hotness",
+    "recommended_for" => "jason.jordan"}.to_json
+  end
+
+  def trial_body_missing
+    {"title" => "Blahblah",
+    "description" => "New Hotness"}.to_json
+  end
+
+  def trial_body_missing_recom
+    {"url" => "www.whocares.com",
+    "description" => "New Hotness",
+    "recommended_for" => "jason.jordan"}.to_json
+  end
+
   def test_users_can_add_links
     make_existing_users
     user = User.first
     header "Authorization", user.username
+
     assert_equal 0, Link.count
 
-    r = post "/links", description: "New Hotness", title: "Blahblah", url: "www.whocares.com", username: user.username
+    r = post "/links", body = trial_body
 
     assert_equal 200, r.status
     assert_equal 1, Link.count
@@ -46,7 +71,7 @@ class AppTests < Minitest::Test
     header "Authorization", user.username
     assert_equal 0, Link.count
 
-    r = post "links/recommended", description: "New Hotness", title: "Blahblah", url: "www.whocares.com", recommended_by: user.username, user: friend.username
+    r = post "links/recommended", body = trial_body_recom
 
     assert_equal 200, r.status
     assert_equal 1, Link.count
@@ -59,9 +84,20 @@ class AppTests < Minitest::Test
     make_existing_users
     user = User.first
 
-    r = post "/links", description: "New Hotness", title: "Blahblah", url: "www.whocares.com", username: user.username
+    r = post "/links", body = trial_body
 
     assert_equal 401, r.status
+  end
+
+  def test_wrong_username_will_error
+    make_existing_users
+    user = User.first
+    header "Authorization", "johnnybgood"
+
+
+    r = post "/links", body = trial_body
+
+    assert_equal 403, r.status
   end
 
   def test_missing_params_will_error
@@ -70,8 +106,8 @@ class AppTests < Minitest::Test
     friend = User.last
     header "Authorization", user.username
 
-    r = post "/links", description: "New Hotness", title: "Blahblah"
-    q = post "links/recommended", description: "New Hotness", url: "www.whocares.com", recommended_by: user.username, user: friend.username
+    r = post "/links", body = trial_body_missing
+    q = post "links/recommended", body = trial_body_missing_recom
 
     assert_equal 400, q.status
     assert_equal 400, r.status
