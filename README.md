@@ -17,25 +17,29 @@ Also, if you want to punch up the name / brand, feel free!
 #Api
 
 ## To add link
-  post "/links"
-  -request
-  header: Authorization: "username"
+..post "/links"
+..-request
+..header: Authorization: "username"
+```
   body = {url => "www....",
           title => "Funny Cat",
           description => "Cat cant jump from counter."} in json format
+```
+..-response
+..200 - OK
+..400 - Bad Request
+..401 - Unauthorized (no username)
+..403 - Forbidden (username isnt in database)
+..404 - Not Found
+..500 - Server Issues
 
-  -response
-  200 - OK
-  400 - Bad Request
-  401 - Unauthorized (no username likely cause)
-  404 - Not Found
-  500 - Server Issues
 ## To get links
-  get "/links"
-  -request
-  header: Authorization: "username"
+..get "/links"
+..-request
+..header: Authorization: "username"
 
-  -response
+..-response
+```
   body = {username => "username",
           links => [
               {url => "www.... ",
@@ -47,35 +51,38 @@ Also, if you want to punch up the name / brand, feel free!
               description => "Dog runs away from kitten."}
                     ]
               } in json format
-
-  400 - Bad Request
-  401 - Unauthorized (no username likely cause)
-  404 - Not Found
-  500 - Server Issues
+```
+..400 - Bad Request
+..401 - Unauthorized (no username)
+..403 - Forbidden (username isnt in database)
+..404 - Not Found
+..500 - Server Issues
 
 ## To post recommendations
-  post "/links/recommended"
-  -request
-  header: Authorization: "username"
+..post "/links/recommended"
+..-request
+..header: Authorization: "username"
+```
   body = {url => "www....",
           title => "Funny Cat",
           description => "Cat cant jump from counter.",
           recommended_for => "scrappydoo"}
           in json format
-
-  -response
-  200 - OK
-  400 - Bad Request
-  401 - Unauthorized (no username likely cause)
-  404 - Not Found
-  500 - Server Issues
+```
+..-response
+..400 - Bad Request
+..401 - Unauthorized (no username)
+..403 - Forbidden (username isnt in database)
+..404 - Not Found
+..500 - Server Issues
 
 ## To get recommendations
-  get "/links/recommended"
-  -request
-  header: Authorization: "username"
+..get "/links/recommended"
+..-request
+..header: Authorization: "username"
 
-  -response
+..-response
+```
   body = {username => "username",
           links => [
               {url => "www.... ",
@@ -89,27 +96,9 @@ Also, if you want to punch up the name / brand, feel free!
               recommended_by => "scoobydoo"}
                     ]
               } in json format
-
-  400 - Bad Request
-  401 - Unauthorized (no username likely cause)
-  404 - Not Found
-  500 - Server Issues
-
-
-### File Rundown
-
 ```
-.
-├── Gemfile             # Details which gems are required by the project
-├── README.md           # This file
-├── Rakefile            # Defines `rake generate:migration` and `db:migrate`
-├── config
-│   └── database.yml    # Defines the database config (e.g. name of file)
-├── console.rb          # `ruby console.rb` starts `pry` with models loaded
-├── db
-│   ├── dev.sqlite3     # Default location of the database file
-│   ├── migrate         # Folder containing generated migrations
-│   └── setup.rb        # `require`ing this file sets up the db connection
-└── lib                 # Your ruby code (models, etc.) should go here
-    └── all.rb          # Require this file to auto-require _all_ `.rb` files in `lib`
-```
+..400 - Bad Request
+..401 - Unauthorized (no username)
+..403 - Forbidden (username isnt in database)
+..404 - Not Found
+..500 - Server Issues
