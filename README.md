@@ -3,7 +3,7 @@
 Work with engineers from another discipline to build a polished application for sharing links
 
 As a user, I want to be able to
-
+```
 save links that seem interesting
 
 see links that I've saved in the past
@@ -11,8 +11,10 @@ see links that I've saved in the past
 recommend links to other users
 
 see links that other users have recommended to me and who recommended them
-
+```
+```
 moreover, I'd like for any recommendations that get made to be published to the #plock_recommendations channel in our Slack team (with the username of both the recommender and recommendee)
+```
 
 I'm okay with using a hardcoded list of users / passwords / Slack usernames as a proof of concept.
 
