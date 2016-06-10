@@ -13,8 +13,9 @@ recommend links to other users
 see links that other users have recommended to me and who recommended them
 ```
 ```
-moreover, I'd like for any recommendations that get made to be published to
-the #plock_recommendations channel in our Slack team (with the username of both the recommender and recommendee)
+Moreover, I'd like for any recommendations that get made to be published to
+the #plock_recommendations channel in our Slack team (with the username of both
+the recommender and recommendee)
 ```
 
 I'm okay with using a hardcoded list of users / passwords / Slack usernames as a proof of concept.
@@ -85,8 +86,7 @@ Also, if you want to punch up the name / brand, feel free!
 **request**
 ```
   header: Authorization: "username"
-```
-```
+
   body = {url => "www....",
           title => "Funny Cat",
           description => "Cat cant jump from counter.",
@@ -134,5 +134,28 @@ Also, if you want to punch up the name / brand, feel free!
 403 - Forbidden (username isnt in database)
 
 404 - Not Found
+
+500 - Server Issues
+
+## To delete a link
+####delete "/links"
+
+**request**
+```
+  header: Authorization: "username"
+
+  body = {title => "Funny Cat"}
+          in json format
+```
+**response**
+200 - OK
+
+400 - Bad Request
+
+401 - Unauthorized (no username)
+
+403 - Forbidden (username isnt in database)
+
+404 - Not Found (user has no links)
 
 500 - Server Issues
