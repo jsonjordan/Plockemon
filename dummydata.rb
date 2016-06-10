@@ -11,6 +11,7 @@ daniel = User.create! username: "daniel_buompane"
 marybeth = User.create! username: "marybethclark"
 nicole = User.create! username: "nicole.palumbo"
 dana = User.create! username: "dana"
+alyssa = User.create! username: "alyssapratt"
 
 
 #Maria [user_id = 13]
@@ -63,8 +64,15 @@ Link.create!(user_id: dana.id, url: "http://www.thisiswhyimbroke.com/", title: "
 recommended_by_id: nicole.id)
 
 #Dana
-Link.create!(user_id: dana.id, url: "hhttps://trello.com/", title: "Trello", description: "trello")
+Link.create!(user_id: dana.id, url: "https://trello.com/", title: "Trello", description: "trello")
 Link.create!(user_id: dana.id, url: "https://www.twitter.com", title: "Twitter", description: "lots o' tweetin yall")
 Link.create!(user_id: dana.id, url: "https://slack.com/", title:"Pinterest", description: "Boards full of awesome")
 Link.create!(user_id: nicole.id, url: "https://www.etsy.com/", title: "Etsy", description: "Handmade stuff",
 recommended_by_id: dana.id)
+
+#Alyssa
+Link.create!(user_id: alyssa.id, url: "http://www.4chan.org/", title: "4Chan", description: "lol")
+Link.create!(user_id: alyssa.id, url: "https://www.wcu.edu/", title: "Western Carolina", description: "your school right?")
+Link.create!(user_id: alyssa.id, url: "https://www1.jwu.edu/", title: "JWU", description: "This place was way too expensive")
+Link.create!(user_id: maria.id, url: "https://www.reddit.com/r/MealPrepSunday/", title: "Meal Prep", description: "one of the less gross places on Reddit",
+recommended_by_id: alyssa.id)
