@@ -1,12 +1,11 @@
 require 'pry'
 require 'httparty'
 require 'json'
-require './token'
 
 text = "@mariacassino recommended https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet for @jason.jordan!"
 
 r = HTTParty.post("https://slack.com/api/chat.postMessage",
-              query: {token: Token,
+              query: {token: SLACK_TOKEN,
                       channel: "C1FJJ2W1F",
                       text: text,
                       unfurl_links: true,
