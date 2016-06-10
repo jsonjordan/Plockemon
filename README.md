@@ -17,28 +17,38 @@ Also, if you want to punch up the name / brand, feel free!
 #Api
 
 ## To add link
-..post "/links"
-..-request
-..header: Authorization: "username"
+  post "/links"
+
+  -request
+
+  header: Authorization: "username"
 ```
   body = {url => "www....",
           title => "Funny Cat",
           description => "Cat cant jump from counter."} in json format
 ```
-..-response
-..200 - OK
-..400 - Bad Request
-..401 - Unauthorized (no username)
-..403 - Forbidden (username isnt in database)
-..404 - Not Found
-..500 - Server Issues
+  -response
+
+  200 - OK
+
+  400 - Bad Request
+
+  401 - Unauthorized (no username)
+
+  403 - Forbidden (username isnt in database)
+
+  404 - Not Found
+
+  500 - Server Issues
 
 ## To get links
-..get "/links"
-..-request
-..header: Authorization: "username"
+  get "/links"
 
-..-response
+  -request
+
+  header: Authorization: "username"
+
+  -response
 ```
   body = {username => "username",
           links => [
@@ -52,16 +62,22 @@ Also, if you want to punch up the name / brand, feel free!
                     ]
               } in json format
 ```
-..400 - Bad Request
-..401 - Unauthorized (no username)
-..403 - Forbidden (username isnt in database)
-..404 - Not Found
-..500 - Server Issues
+  400 - Bad Request
+
+  401 - Unauthorized (no username)
+
+  403 - Forbidden (username isnt in database)
+
+  404 - Not Found
+
+  500 - Server Issues
 
 ## To post recommendations
-..post "/links/recommended"
-..-request
-..header: Authorization: "username"
+  post "/links/recommended"
+
+  -request
+
+  header: Authorization: "username"
 ```
   body = {url => "www....",
           title => "Funny Cat",
@@ -70,15 +86,22 @@ Also, if you want to punch up the name / brand, feel free!
           in json format
 ```
 ..-response
+
 ..400 - Bad Request
+
 ..401 - Unauthorized (no username)
+
 ..403 - Forbidden (username isnt in database)
+
 ..404 - Not Found
+
 ..500 - Server Issues
 
 ## To get recommendations
 ..get "/links/recommended"
+
 ..-request
+
 ..header: Authorization: "username"
 
 ..-response
@@ -98,7 +121,11 @@ Also, if you want to punch up the name / brand, feel free!
               } in json format
 ```
 ..400 - Bad Request
+
 ..401 - Unauthorized (no username)
+
 ..403 - Forbidden (username isnt in database)
+
 ..404 - Not Found
+
 ..500 - Server Issues
