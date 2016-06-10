@@ -24,28 +24,35 @@ class PlockApp < Sinatra::Base
   def user
     username = request.env["HTTP_AUTHORIZATION"]
     if !username
-      # raise "No username provided"
       halt 401, "Username not provided"
-    elsif User.where(username: username).first
-      User.where(username: username).first
+    elsif User.find_by(username: username)
+      User.find_by(username: username)
     else
-      # raise "User not found"
       halt 403, "No user by that username"
     end
   end
 
   def parsing_incoming
     incoming_data = request.body.read
-    JSON.parse incoming_data
+    begin
+      JSON.parse incoming_data
+    rescue
+      halt 400, "Request not JSON formatted"
+    end
   end
 
   get "/links" do
-    link_list = user.links.where(recommended_by_id: nil).map {|l| l.relevent_data}
-    body = {"username" => user.username,
-            "links" => link_list
-                }
+    if user.links.where(recommended_by_id: nil).count > 0
+      link_list = user.links.where(recommended_by_id: nil).map {|l| l.relevent_data}
+      body = {"username" => user.username,
+              "links" => link_list
+                  }
 
-    json body
+
+      json body
+    else
+      halt 404, "User has no links"
+    end
   end
 
   post "/links" do
@@ -53,18 +60,21 @@ class PlockApp < Sinatra::Base
     begin
       Link.create!(url: parsed_data["url"], title: parsed_data["title"], description: parsed_data["description"], user_id: user.id)
     rescue
-      400
+      halt 400, "Not all information provided"
     end
   end
 
   get "/links/recommended" do
-    # link_list = Link.where(user_id: user.id).select{|k| k.recommended_by_id.present? }.map {|l| l.relevent_data_with_reco}
-    link_list = user.links.where.not(recommended_by_id: nil).map {|l| l.relevent_data_with_reco}
-    body = {"username" => user.username,
-            "links" => link_list
-                }
+    if user.links.where.not(recommended_by_id: nil).count > 0
+      link_list = user.links.where.not(recommended_by_id: nil).map {|l| l.relevent_data_with_reco}
+      body = {"username" => user.username,
+              "links" => link_list
+                  }
 
-    json body
+      json body
+    else
+      halt 404, "User has no recommended links"
+    end
   end
 
   post "/links/recommended" do

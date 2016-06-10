@@ -147,4 +147,19 @@ class AppTests < Minitest::Test
     assert_equal 2, body.count
   end
 
+  def test_user_with_no_links_will_get_error
+    header "Authorization", friend.username
+
+    r = get "/links"
+
+    assert_equal 404, r.status
+  end
+
+  def test_user_with_no_recommended_will_get_error
+    header "Authorization", friend.username
+
+    r = get "/links/recommended"
+
+    assert_equal 404, r.status
+  end
 end
