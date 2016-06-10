@@ -4,7 +4,7 @@ require "sinatra/json"
 
 require 'httparty'
 require 'json'
-require 'rdiscount'
+require 'github/markup'
 
 require "./db/setup"
 require "./lib/all"
@@ -51,8 +51,8 @@ class PlockApp < Sinatra::Base
   end
 
   get "/" do
-    markdown = File.read("./README.md")
-    RDiscount.new(markdown).to_html
+    @html = GitHub::Markup.render('README.md', File.read("README.md"))
+    erb :readme
   end
 
   get "/links" do
