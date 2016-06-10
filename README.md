@@ -17,11 +17,12 @@ Also, if you want to punch up the name / brand, feel free!
 #Api
 
 ## To add link
-  post "/links"
+  ###post "/links"
 
   -request
-
+```
   header: Authorization: "username"
+```
 ```
   body = {url => "www....",
           title => "Funny Cat",
@@ -42,12 +43,12 @@ Also, if you want to punch up the name / brand, feel free!
   500 - Server Issues
 
 ## To get links
-  get "/links"
+  ###get "/links"
 
   -request
-
+```
   header: Authorization: "username"
-
+```
   -response
 ```
   body = {username => "username",
@@ -55,7 +56,6 @@ Also, if you want to punch up the name / brand, feel free!
               {url => "www.... ",
               title => "Funny Cat",
               description => "Cat cant jump from counter."},
-
               {url => "www....",
               title => "Stupid Dog",
               description => "Dog runs away from kitten."}
@@ -73,11 +73,12 @@ Also, if you want to punch up the name / brand, feel free!
   500 - Server Issues
 
 ## To post recommendations
-  post "/links/recommended"
+  ###post "/links/recommended"
 
   -request
-
+```
   header: Authorization: "username"
+```
 ```
   body = {url => "www....",
           title => "Funny Cat",
@@ -85,26 +86,26 @@ Also, if you want to punch up the name / brand, feel free!
           recommended_for => "scrappydoo"}
           in json format
 ```
-..-response
+  -response
 
-..400 - Bad Request
+  400 - Bad Request
 
-..401 - Unauthorized (no username)
+  401 - Unauthorized (no username)
 
-..403 - Forbidden (username isnt in database)
+  403 - Forbidden (username isnt in database)
 
-..404 - Not Found
+  404 - Not Found
 
-..500 - Server Issues
+  500 - Server Issues
 
 ## To get recommendations
-..get "/links/recommended"
+  ###get "/links/recommended"
 
-..-request
-
-..header: Authorization: "username"
-
-..-response
+  -request
+```
+  header: Authorization: "username"
+```
+  -response
 ```
   body = {username => "username",
           links => [
@@ -112,7 +113,6 @@ Also, if you want to punch up the name / brand, feel free!
               title => "Funny Cat",
               description => "Cat cant jump from counter.",
               recommended_by => "jamesdabbs"},
-
               {url => "www....",
               title => "Stupid Dog",
               description => "Dog runs away from kitten.",
@@ -120,12 +120,12 @@ Also, if you want to punch up the name / brand, feel free!
                     ]
               } in json format
 ```
-..400 - Bad Request
+  400 - Bad Request
 
-..401 - Unauthorized (no username)
+  401 - Unauthorized (no username)
 
-..403 - Forbidden (username isnt in database)
+  403 - Forbidden (username isnt in database)
 
-..404 - Not Found
+  404 - Not Found
 
-..500 - Server Issues
+  500 - Server Issues
