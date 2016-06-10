@@ -23,7 +23,7 @@ Work with engineers from another discipline to build a polished application for 
 
 #Api
 
-## To add link
+## To add link to users list
 ####post "https://plockemon.herokuapp.com/links"
 
 **request**
@@ -55,7 +55,7 @@ body:
 
 500 - Server Issues
 
-## To get links
+## To get users links
 ####get "https://plockemon.herokuapp.com/links"
 
 **request**
@@ -92,7 +92,7 @@ body:
 
 500 - Server Issues
 
-## To post recommendations
+## To post recommendations for other users
 ####post "https://plockemon.herokuapp.com/links/recommended"
 
 **request**
@@ -124,7 +124,7 @@ body:
 
 500 - Server Issues
 
-## To get recommendations
+## To get users recommendations
 ####get "https://plockemon.herokuapp.com/links/recommended"
 
 **request**
