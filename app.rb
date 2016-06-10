@@ -55,7 +55,8 @@ class PlockApp < Sinatra::Base
   end
 
   get "/links/recommended" do
-    link_list = Link.where(user_id: user.id).select{|k| k.recommended_by_id.present? }.map {|l| l.relevent_data_with_reco}
+    # link_list = Link.where(user_id: user.id).select{|k| k.recommended_by_id.present? }.map {|l| l.relevent_data_with_reco}
+    link_list = Link.where(user_id: user.id).where.not(recommended_by_id: nil).map {|l| l.relevent_data_with_reco}
     body = {"username" => user.username,
             "links" => link_list
                 }
