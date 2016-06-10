@@ -13,10 +13,8 @@ recommend links to other users
 see links that other users have recommended to me and who recommended them
 ```
 ```
-moreover, I'd like for any recommendations that get made
- to be published to the #plock_recommendations channel in
-  our Slack team (with the username of both the
-     recommender and recommendee)
+moreover, I'd like for any recommendations that get made to be published to
+the #plock_recommendations channel in our Slack team (with the username of both the recommender and recommendee)
 ```
 
 I'm okay with using a hardcoded list of users / passwords / Slack usernames as a proof of concept.
