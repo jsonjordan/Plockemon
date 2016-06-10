@@ -40,6 +40,10 @@ class AppTests < Minitest::Test
     "description" => "New Hotness"}.to_json
   end
 
+  def delete_body
+    {"title" => "Beep"}.to_json
+  end
+
   def trial_body2
     {"url" => "www.blah.com",
     "title" => "Beep",

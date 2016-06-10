@@ -8,10 +8,19 @@ require './token'
 
 require "./db/setup"
 require "./lib/all"
+require "rack/cors"
+
 
 class PlockApp < Sinatra::Base
   set :logging, true
   set :show_exceptions, false
+
+  # use Rack::Cors do
+  #   allow do
+  #     origins "*"
+  #     resource "*", headers: :any, methods: :any
+  #   end
+  # end
 
   error do |e|
     raise e
@@ -107,3 +116,5 @@ class PlockApp < Sinatra::Base
   end
 
 end
+
+PlockApp.run!
