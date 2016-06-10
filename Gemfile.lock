@@ -19,6 +19,7 @@ GEM
     backports (3.6.8)
     builder (3.2.2)
     coderay (1.1.0)
+    github-markup (1.4.0)
     httparty (0.13.7)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -47,7 +48,6 @@ GEM
     rack-test (0.6.3)
       rack (>= 1.0)
     rake (11.1.2)
-    rdiscount (2.2.0.1)
     ruby-progressbar (1.8.1)
     sinatra (1.4.7)
       rack (~> 1.5)
@@ -72,6 +72,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  github-markup
   httparty
   minitest
   minitest-focus
@@ -81,7 +82,6 @@ DEPENDENCIES
   rack-cors
   rack-test
   rake
-  rdiscount
   sinatra
   sinatra-contrib
   sqlite3
