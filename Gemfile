@@ -9,6 +9,7 @@ gem 'sinatra-contrib'
 gem 'rack-cors', require: 'rack/cors'
 gem 'httparty'
 gem 'github-markup'
+gem 'redcarpet'
 
 group :development do
   gem 'sqlite3'
