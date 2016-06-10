@@ -4,7 +4,6 @@ require "sinatra/json"
 
 require 'httparty'
 require 'json'
-require './token'
 
 require "./db/setup"
 require "./lib/all"
