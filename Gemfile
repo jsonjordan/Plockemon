@@ -8,6 +8,7 @@ gem 'sinatra', require: false
 gem 'sinatra-contrib'
 gem 'rack-cors', require: 'rack/cors'
 gem 'httparty'
+gem 'rdiscount'
 
 group :development do
   gem 'sqlite3'

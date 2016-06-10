@@ -4,6 +4,7 @@ require "sinatra/json"
 
 require 'httparty'
 require 'json'
+require 'rdiscount'
 
 require "./db/setup"
 require "./lib/all"
@@ -47,6 +48,11 @@ class PlockApp < Sinatra::Base
     rescue
       halt 400, "Request not JSON formatted"
     end
+  end
+
+  get "/" do
+    markdown = File.read("./README.md")
+    RDiscount.new(markdown).to_html
   end
 
   get "/links" do
