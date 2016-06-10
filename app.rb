@@ -2,6 +2,10 @@ require "pry"
 require "sinatra/base"
 require "sinatra/json"
 
+require 'httparty'
+require 'json'
+require './token'
+
 require "./db/setup"
 require "./lib/all"
 
@@ -67,15 +71,30 @@ class PlockApp < Sinatra::Base
   post "/links/recommended" do
     parsed_data = parsing_incoming
     begin
-      friend_id = User.find_by(username: parsed_data["recommended_for"]).id
+      friend = User.find_by(username: parsed_data["recommended_for"])
     rescue
       halt 400, "No such user exists"
     end
     begin
-      Link.create!(url: parsed_data["url"], title: parsed_data["title"], description: parsed_data["description"], user_id: friend_id, recommended_by_id: user.id)
+      Link.create!(url: parsed_data["url"], title: parsed_data["title"], description: parsed_data["description"], user_id: friend.id, recommended_by_id: user.id)
     rescue
       halt 400, "Not all information provided"
     end
+
+    # text = "@#{user.username} recommended #{parsed_data["url"]} for @#{friend.username}!"
+    #
+    # HTTParty.post("https://slack.com/api/chat.postMessage",
+    #               query: {token: Token,
+    #                       channel: "C1FJJ2W1F",
+    #                       text: text,
+    #                       unfurl_links: true,
+    #                       unfurl_media: true,
+    #                       link_names: 1,
+    #                       username: "Plokebot",
+    #                       as_user: true,
+    #                       icon_url: "http://orig14.deviantart.net/bfb7/f/2014/221/2/4/pokeball_cutie_mark_by_cottenheart-d7ufe4x.png"
+    #                       }
+    #                       )
   end
 
 end
