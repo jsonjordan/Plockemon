@@ -178,9 +178,10 @@ header: Authorization: "username"
 
 body:
 
-```    {title => "Funny Cat"}
+```    
+          {title => "Funny Cat"}
           in json format
-          ```
+```
 
 **response**
 
