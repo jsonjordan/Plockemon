@@ -19,12 +19,20 @@ class AppTests < Minitest::Test
     PlockApp.reset_database
   end
 
-  def make_existing_users
-    User.create! username: "mariacassino"
-    User.create! username: "jason.jordan"
-    # User.create! username: "travisjohnson"
-    # User.create! username: "nntroyer"
+  def user
+    User.where(username: "mariacassino").first_or_create!
   end
+
+  def friend
+    User.where(username: "jason.jordan").first_or_create!
+  end
+
+  # def make_existing_users
+  #   User.create! username: "mariacassino"
+  #   User.create! username: "jason.jordan"
+  #   User.create! username: "travisjohnson"
+  #   User.create! username: "nntroyer"
+  # end
 
   def trial_body
     {"url" => "www.whocares.com",
@@ -42,14 +50,14 @@ class AppTests < Minitest::Test
     {"url" => "www.whocares.com",
     "title" => "Blahblah",
     "description" => "New Hotness",
-    "recommended_for" => "jason.jordan"}.to_json
+    "recommended_for" => friend.username}.to_json
   end
 
   def trial_body_recom2
     {"url" => "www.whateva.com",
     "title" => "Aardwolf",
     "description" => "Not a panda",
-    "recommended_for" => "jason.jordan"}.to_json
+    "recommended_for" => friend.username}.to_json
   end
 
   def trial_body_missing
@@ -60,12 +68,10 @@ class AppTests < Minitest::Test
   def trial_body_missing_recom
     {"url" => "www.whocares.com",
     "description" => "New Hotness",
-    "recommended_for" => "jason.jordan"}.to_json
+    "recommended_for" => friend.username}.to_json
   end
 
   def test_users_can_add_links
-    make_existing_users
-    user = User.first
     header "Authorization", user.username
 
     assert_equal 0, Link.count
@@ -78,9 +84,6 @@ class AppTests < Minitest::Test
   end
 
   def test_user_can_recommend_to_another_user
-    make_existing_users
-    user = User.first
-    friend = User.last
     header "Authorization", user.username
     assert_equal 0, Link.count
 
@@ -94,17 +97,12 @@ class AppTests < Minitest::Test
   end
 
   def test_no_username_will_error
-    make_existing_users
-    user = User.first
-
     r = post "/links", body = trial_body
 
     assert_equal 401, r.status
   end
 
   def test_wrong_username_will_error
-    make_existing_users
-    user = User.first
     header "Authorization", "johnnybgood"
 
 
@@ -114,9 +112,6 @@ class AppTests < Minitest::Test
   end
 
   def test_missing_params_will_error
-    make_existing_users
-    user = User.first
-    friend = User.last
     header "Authorization", user.username
 
     r = post "/links", body = trial_body_missing
@@ -127,8 +122,6 @@ class AppTests < Minitest::Test
   end
 
   def test_user_can_get_list_of_links
-    make_existing_users
-    user = User.first
     header "Authorization", user.username
     q = post "/links", body = trial_body
     t = post "/links", body = trial_body2
@@ -141,10 +134,6 @@ class AppTests < Minitest::Test
   end
 
   def test_user_can_get_list_of_recoms
-    make_existing_users
-    user = User.first
-    friend = User.last
-
     header "Authorization", user.username
     q = post "/links/recommended", body = trial_body_recom
     t = post "/links/recommended", body = trial_body_recom2
