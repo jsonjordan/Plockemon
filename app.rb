@@ -32,7 +32,6 @@ class PlockApp < Sinatra::Base
       # raise "User not found"
       halt 403, "No user by that username"
     end
-
   end
 
   def parsing_incoming
