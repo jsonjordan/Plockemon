@@ -47,6 +47,7 @@ GEM
     rack-test (0.6.3)
       rack (>= 1.0)
     rake (11.1.2)
+    rdiscount (2.2.0.1)
     ruby-progressbar (1.8.1)
     sinatra (1.4.7)
       rack (~> 1.5)
@@ -80,6 +81,7 @@ DEPENDENCIES
   rack-cors
   rack-test
   rake
+  rdiscount
   sinatra
   sinatra-contrib
   sqlite3
