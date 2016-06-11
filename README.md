@@ -1,4 +1,7 @@
 #Plockémon
+####"Gotta link 'em all!"
+
+
 
 Work with engineers from another discipline to build a polished application for sharing links
 
@@ -199,4 +202,26 @@ body:
 
 
 
-----------------------------------------------Jason Jordan
+
+```
+
+
+               _,     _,
+              /)|    /)\
+              \_'-"`/(_/```",,
+                /   <        ``--._
+                |. _ )     `    *  ',
+                ^  ^/_,     *     (\*\
+                (#_/  `\)  /'  * - ))_|
+                        \  \*   _,//_ *
+          Aardwolf       ) >\_* ((|\_/
+            Studios      \ | \  | # (
+                          \#  \#\ \ #
+                           \\  \(  )/
+                           _)> _))/(_
+           b'ger .-\\,, , /\\//\//\\/),, ,,)/
+                   ,\.        .-    -'-,)\/.'))
+
+
+
+```
