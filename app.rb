@@ -114,7 +114,7 @@ class PlockApp < Sinatra::Base
                           unfurl_media: true,
                           link_names: 1,
                           username: "Plokebot",
-                          as_user: true,
+                          as_user: false,
                           icon_url: "http://orig14.deviantart.net/bfb7/f/2014/221/2/4/pokeball_cutie_mark_by_cottenheart-d7ufe4x.png"
                           }
                           )
