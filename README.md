@@ -1,7 +1,7 @@
 #Plockémon
-####"Gotta link 'em all!"
+"Gotta link 'em all!"
 
-
+##Purpose
 
 Work with engineers from another discipline to build a polished application for sharing links
 
