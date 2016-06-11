@@ -107,7 +107,7 @@ class PlockApp < Sinatra::Base
     text = "@#{user.username} recommended #{parsed_data["url"]} for @#{friend.username}!"
 
     HTTParty.post("https://slack.com/api/chat.postMessage",
-                  query: {token: SLACK_TOKEN,
+                  query: {token: ENV["SLACK_TOKEN"],
                           channel: "C1FJJ2W1F",
                           text: text,
                           unfurl_links: true,
