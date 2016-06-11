@@ -15,12 +15,12 @@ class PlockApp < Sinatra::Base
   set :logging, true
   set :show_exceptions, false
 
-  # use Rack::Cors do
-  #   allow do
-  #     origins "*"
-  #     resource "*", headers: :any, methods: :any
-  #   end
-  # end
+  use Rack::Cors do
+    allow do
+      origins "*"
+      resource "*", headers: :any, methods: :any
+    end
+  end
 
   error do |e|
     raise e
