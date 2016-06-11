@@ -104,7 +104,7 @@ class PlockApp < Sinatra::Base
       halt 400, "Not all information provided"
     end
 
-    text = "@#{user.username} recommended #{parsed_data["url"]} for @#{friend.username}!     --'Gotta link 'em all!'"
+    text = "@#{user.username} recommended #{parsed_data["url"]} for @#{friend.username}!"
 
     HTTParty.post("https://slack.com/api/chat.postMessage",
                   query: {token: ENV["SLACK_TOKEN"],
