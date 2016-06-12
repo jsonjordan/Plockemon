@@ -166,4 +166,17 @@ class AppTests < Minitest::Test
 
     assert_equal 404, r.status
   end
+
+
+    def test_user_can_delete_their_own_links
+      header "Authorization", user.username
+      r = post "/links", body = trial_body
+      t = post "/links", body = trial_body2
+
+      r = delete "/links", {"title" => "Blahblah"}.to_json
+
+      assert_equal 200, r.status
+      assert_equal 1, Link.count
+    end
+
 end
