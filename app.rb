@@ -78,6 +78,12 @@ class PlockApp < Sinatra::Base
     end
   end
 
+  delete "/links" do
+    parsed_data = parsing_incoming
+    user.links.find_by(title: parsed_data["title"]).delete
+    end
+
+
   get "/links/recommended" do
     if user.links.where.not(recommended_by_id: nil).count > 0
       link_list = user.links.where.not(recommended_by_id: nil).map {|l| l.relevent_data_with_reco}
@@ -121,4 +127,4 @@ class PlockApp < Sinatra::Base
   end
 end
 
-PlockApp.run!
+# PlockApp.run!
