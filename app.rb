@@ -127,4 +127,4 @@ class PlockApp < Sinatra::Base
   end
 end
 
-# PlockApp.run!
+PlockApp.run!
